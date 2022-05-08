@@ -22,9 +22,10 @@ const route = useRoute();
       </li>
       <li>
         <router-link
-          :to="{ name: 'game' }"
+          :to="{ name: 'game', params: { uuid: 'TESTUUID' } }"
           class="nav-link py-3 border-bottom"
           :class="{ active: route.name == 'game' }"
+          :disabled="true"
         >
           <i class="fa-solid fa-flag-checkered"></i>
         </router-link>

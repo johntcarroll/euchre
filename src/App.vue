@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import "./style/cards.css";
+</script>
 
 <template>
   <router-view />

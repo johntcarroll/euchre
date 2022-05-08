@@ -16,7 +16,7 @@ export default [
       {
         name: "game",
         component: Game,
-        path: "play",
+        path: "play/:uuid?",
       },
       {
         name: "user",
