@@ -14,14 +14,8 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div id="Game">
-    <div class="row">
-      <div class="col-12">
-        <h6>{{ JSON.stringify(gameStore, null, 2) }}</h6>
-      </div>
-    </div>
-    <Chat />
-    <div class="game-board">
+  <div id="Game" class="row">
+    <div class="game-board col-8">
       <div class="hand-container partner">
         <Hand handType="card-table">
           <Card />
@@ -100,10 +94,17 @@ onMounted(() => {
         <div>Thier Points: 0</div>
       </div>
     </div>
+    <div id="Debug" class="col-4">
+      <pre>{{ JSON.stringify(gameStore, null, 2) }}</pre>
+      <Chat />
+    </div>
   </div>
 </template>
 
 <style scoped>
+#Debug {
+float: right;
+}
 .game-board {
   position: relative;
   background-color: #216c41;

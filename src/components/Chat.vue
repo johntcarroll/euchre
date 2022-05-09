@@ -18,12 +18,22 @@ function submit() {
   text.value = '';
 }
 </script>
+<style scoped>
+#Chat {
+  float: right;
+  width: 100%;
+}
+#Chat form, #Chat textarea {
+  width: 100%;
+}
+</style>
 <template>
-  <label>Chat:
-    <textarea id="ta"></textarea>
-      <form id="manual-commands" @submit.prevent="submit">
-	<input id="text-input" v-model="text" type="text" placeholder="enter text here...">
-	<input type="submit" value="Send">
-      </form>
-  </label>
+<div id="Chat">
+  <h6>Chat</h6>
+  <textarea id="ta"></textarea>
+  <form id="manual-commands" @submit.prevent="submit">
+    <input id="text-input" v-model="text" type="text" placeholder="enter text here...">
+    <input type="submit" value="Send">
+  </form>
+</div>
 </template>
