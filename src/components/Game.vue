@@ -4,11 +4,13 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import Hand from "./cards/Hand.vue";
 import Card from "./cards/Card.vue";
+import Chat from "./Chat.vue";
 const gameStore = useGameStore();
 const route = useRoute();
 
 onMounted(() => {
   if (route.params.uuid) gameStore.uuid = route.params.uuid;
+  gameStore.connect();
 });
 </script>
 <template>
@@ -18,6 +20,7 @@ onMounted(() => {
         <h6>{{ JSON.stringify(gameStore, null, 2) }}</h6>
       </div>
     </div>
+    <Chat />
     <div class="game-board">
       <div class="hand-container partner">
         <Hand handType="card-table">

@@ -10,5 +10,11 @@ export default defineConfig({
     hmr: {
       host: "0.0.0.0",
     },
+    proxy: {
+      '/websocket': {
+        target: 'ws://localhost:8765',
+        ws: true
+      }
+    }
   },
 });

@@ -25,27 +25,39 @@ const useGameStore = defineStore("game", {
       hand: [],
       topKitty: null,
       dealer: null,
+      chatBufferOut: [],
     },
   }),
   actions: {
     async connect() {
-      try {
-        state.socket = new WebSocket();
-        state.socket.addEventListener("open", (event) => {
-          this.tick(event.data);
-        });
-        state.socket.addEventListener("message", (event) => {
-          this.tick(event.data);
-        });
-        state.socket.addEventListener("error", (event) => {
-          this.connect();
-        });
-      } catch (e) {
-        throw e;
-      }
+      this.socket = new WebSocket(`${location.origin.replace(/^http/, 'ws')}/websocket`);
+      this.socket.addEventListener("open", (event) => {
+        this.socket.send('foo');
+      });
+      this.socket.addEventListener("message", (event) => {
+	this.parse(event.data)
+      });
+      this.socket.addEventListener("error", (event) => {
+        this.connect();
+      });
     },
-    tick(gameState) {
-      state.game = gameState;
+    parse(data) {
+      let [fn, ...params] = data.split(' ');
+      console.debug("function:", fn, "params:", params);
+      this[fn](...params);
+    },
+    say(speaker, ...words) {
+      words = words.join(' ');
+      console.debug("speaker:", speaker, "words:", words);
+      this.game.chatBufferOut = this.game.chatBufferOut + [`${speaker}: ${words}\n`];
+    },
+    flushChatBuffer() {
+      let flush = this.game.chatBufferOut;
+      this.game.chatBufferOut = [];
+      return flush;
+    },
+    sendChat(input) {
+      this.socket.send(`say ${input}`);
     },
     act(type, option) {
       try {
