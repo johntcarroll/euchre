@@ -4,7 +4,6 @@ const useGameStore = defineStore("game", {
   state: () => ({
     uuid: null,
     socket: null,
-    lobbyGames: [],
     game: {
       activeCards: {
         p1: null,
@@ -26,50 +25,25 @@ const useGameStore = defineStore("game", {
       hand: [],
       topKitty: null,
       dealer: null,
-      chatBufferOut: [],
     },
   }),
   actions: {
-    async connect() {
-      this.socket = new WebSocket(`${location.origin.replace(/^http/, 'ws')}/websocket`);
-      this.socket.addEventListener("open", (event) => {
-        //this.socket.send(`join ${this.uuid}`);
-      });
-      this.socket.addEventListener("message", (event) => {
-        this.parse(event.data)
-      });
-      this.socket.addEventListener("error", (event) => {
-      });
-    },
-    parse(data) {
+    parse(e) {
+      let data = e.data;
       let [fn, ...params] = data.split(' ');
       console.debug("function:", fn, "params:", params);
-      this[fn](...params);
+      (this[fn] || this.debug(fn))(...params);
     },
-    say(speaker, ...words) {
-      words = words.join(' ');
-      console.debug("speaker:", speaker, "words:", words);
-      this.game.chatBufferOut = this.game.chatBufferOut + [`${speaker}: ${words}\n`];
+    debug(fn) {
+      return function(...params) {
+	console.debug("Dropping call to", fn, params, "from game store")
+      };
     },
     join(id) {
-    },
-    gameslist(game) {
-      this.lobbyGames = this.lobbyGames.concat([game]);
-    },
-    refreshLobby() {
-      this.lobbyGames = [];
-      this.socket.send("gameslist");
+      this.router.push("game");
     },
     error(...msg) {
       console.error(msg.join(' '));
-    },
-    flushChatBuffer() {
-      let flush = this.game.chatBufferOut;
-      this.game.chatBufferOut = [];
-      return flush;
-    },
-    sendChat(input) {
-      this.socket.send(`say ${input}`);
     },
     act(type, option) {
       try {

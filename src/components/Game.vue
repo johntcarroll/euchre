@@ -1,16 +1,20 @@
 <script setup>
+import { onMounted, onUnmounted } from "vue";
 import { useGameStore } from "../store/game.store";
-import { onMounted } from "vue";
+import { useSocketStore } from "../store/socket.store";
 import { useRoute } from "vue-router";
 import Hand from "./cards/Hand.vue";
 import Card from "./cards/Card.vue";
 import Chat from "./Chat.vue";
-const gameStore = useGameStore();
 const route = useRoute();
-
+const gameStore = useGameStore();
+const socketStore = useSocketStore();
 onMounted(() => {
   if (route.params.uuid) gameStore.uuid = route.params.uuid;
-  gameStore.connect();
+  socketStore.listen("message", gameStore.parse);
+});
+onUnmounted(() => {
+  socketStore.unlisten("message", gameStore.parse);
 });
 </script>
 <template>

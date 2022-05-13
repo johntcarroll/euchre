@@ -1,20 +1,26 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { useGameStore } from "../store/game.store";
+import { onMounted, onUnmounted, ref } from "vue";
+import { useSocketStore } from "../store/socket.store";
+import { useChatStore } from "../store/chat.store";
 import config from "../config";
-const gameStore = useGameStore();
+const chatStore = useChatStore();
+const socketStore = useSocketStore();
 onMounted(() => {
   const ta = document.getElementById("ta");
-  gameStore.$subscribe((m, s) => {
-    if (m.events.key == "chatBufferOut" && gameStore.game.chatBufferOut.length > 0) {
-      ta.value = (ta.value || "") + gameStore.flushChatBuffer();
+  chatStore.$subscribe((m, s) => {
+    if (m.events.key == "buffer" && chatStore.buffer.length > 0) {
+      ta.value = (ta.value || "") + chatStore.flushBuffer();
       ta.scrollTop = ta.scrollHeight;
     }
   });
+  socketStore.listen("message", chatStore.parse);
+});
+onUnmounted(() => {
+  socketStore.unlisten("message", chatStore.parse);
 });
 const text = ref('');
 function submit() {
-  gameStore.sendChat(text.value);
+  chatStore.send(socketStore.socket, text.value);
   text.value = '';
 }
 </script>
