@@ -45,7 +45,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card opponent-left">
         <Hand handType="card-table">
-          <Card rank="9" suit="hearts" />
+          <Card :rank="gameStore.game.activeCards.left.rank" :suit="gameStore.game.activeCards.left.suit" />
         </Hand>
       </div>
       <div class="hand-container opponent-right">
@@ -59,7 +59,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card opponent-right">
         <Hand handType="card-table">
-          <Card rank="9" suit="hearts" />
+          <Card :rank="gameStore.game.activeCards.right.rank" :suit="gameStore.game.activeCards.right.suit" />
         </Hand>
       </div>
       <div class="hand-container self">
@@ -73,7 +73,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card self">
         <Hand handType="card-table">
-          <Card rank="9" suit="hearts" />
+          <Card :rank="gameStore.game.activeCards.self.rank" :suit="gameStore.game.activeCards.self.suit" />
         </Hand>
       </div>
       <div class="kitty">

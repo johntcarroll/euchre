@@ -6,13 +6,22 @@ const useGameStore = defineStore("game", {
     socket: null,
     game: {
       activeCards: {
-        self: null,
-        left: null,
-        partner: {
+        self: {
+	  suit: "clubs",
+	  rank: "9",
+	},
+        left: {
 	  suit: "spades",
 	  rank: "10",
 	},
-        right: null,
+        partner: {
+	  suit: "hearts",
+	  rank: "A",
+	},
+        right: {
+	  suit: "diams",
+	  rank: "3",
+	},
       },
       trickCounts: {
         us: 0,
