@@ -1,10 +1,22 @@
 let state = {
     gameId: "123456",
     activeCards: {
-        p1: "Ad",
-        p2: "Ad",
-        p3: "Ad",
-        p4: "Ad",
+        self: {
+	  suit: "spades",
+	  rank: "10",
+	},
+        left: {
+	  suit: "spades",
+	  rank: "10",
+	},
+        partner: {
+	  suit: "spades",
+	  rank: "10",
+	},
+        right: {
+	  suit: "spades",
+	  rank: "10",
+	},
     },
     trickCounts: {
         us: 0,

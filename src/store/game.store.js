@@ -6,10 +6,13 @@ const useGameStore = defineStore("game", {
     socket: null,
     game: {
       activeCards: {
-        p1: null,
-        p2: null,
-        p3: null,
-        p4: null,
+        self: null,
+        left: null,
+        partner: {
+	  suit: "spades",
+	  rank: "10",
+	},
+        right: null,
       },
       trickCounts: {
         us: 0,
@@ -44,6 +47,12 @@ const useGameStore = defineStore("game", {
     },
     error(...msg) {
       console.error(msg.join(' '));
+    },
+    attemptplay(socket, rank, suit) {
+      socket.send(`play ${rank} ${suit}`);
+    },
+    play(player, rank, suit) {
+      this.game.activeCards[player] = { rank, suit };
     },
     act(type, option) {
       try {

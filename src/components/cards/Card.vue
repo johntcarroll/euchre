@@ -1,9 +1,11 @@
 <script setup>
 import { useGameStore } from "../../store/game.store";
+import { useSocketStore } from "../../store/socket.store";
 import config from "../../config";
 import { computed } from "@vue/reactivity";
 
 const gameStore = useGameStore();
+const socketStore = useSocketStore();
 const props = defineProps({
   rank: {
     type: String,
@@ -33,11 +35,13 @@ const cardClass = computed(() => ({
 }));
 
 const unicodeSuit = computed(() => `&${props.suit};`);
-function foo() { gameStore.socket.send(`play ${props.rank} ${props.suit}`); }
+function play() {
+  gameStore.attemptplay(socketStore.socket, props.rank, props.suit);
+}
 </script>
 <template>
   <li>
-    <component :is="playable ? 'a' : 'div'" :class="cardClass" @click="foo">
+    <component :is="playable ? 'a' : 'div'" :class="cardClass" @click="play">
       <span class="rank" v-if="props.rank">{{ props.rank.toUpperCase() }}</span>
       <span class="suit" v-if="props.suit" v-html="unicodeSuit"></span>
     </component>

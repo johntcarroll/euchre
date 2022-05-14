@@ -31,7 +31,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card partner">
         <Hand handType="card-table">
-          <Card rank="9" suit="hearts" />
+          <Card :rank="gameStore.game.activeCards.partner.rank" :suit="gameStore.game.activeCards.partner.suit" />
         </Hand>
       </div>
       <div class="hand-container opponent-left">
