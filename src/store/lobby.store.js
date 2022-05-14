@@ -8,7 +8,7 @@ const useLobbyStore = defineStore("lobby", {
   }),
   actions: {
     gameslist(game) {
-      this.games = this.games.concat([game]);
+      this.games.push(game);
     },
     attemptjoin(socket, id, callback) {
       socket.send(`join ${id}`);
@@ -21,7 +21,6 @@ const useLobbyStore = defineStore("lobby", {
       let data = e.data;
       let [fn, ...params] = data.split(' ');
       console.debug("function:", fn, "params:", params);
-      this[fn](...params);
       (this[fn] || this.debug(fn))(...params);
     },
     debug(fn) {
