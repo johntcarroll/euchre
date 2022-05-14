@@ -16,6 +16,7 @@ const useLobbyStore = defineStore("lobby", {
     },
     join(_id) {
       this.joinCallback();
+      this.joinCallback = null;
     },
     parse(e) {
       let data = e.data;
