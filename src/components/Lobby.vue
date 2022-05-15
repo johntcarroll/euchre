@@ -33,7 +33,7 @@ function attemptjoin(id) {
       <button @click="create">&#43; Create new game</button>
       <ul>
 	<li v-for="game in lobbyStore.games">
-	  <a @click="attemptjoin(game)">{{game}}</a>
+	  <a :href="'/play/' + game" @click.prevent="attemptjoin(game)">{{game}}</a>
 	</li>
       </ul>
     </div>
