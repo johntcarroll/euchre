@@ -13,7 +13,7 @@ export default defineConfig({
     proxy: {
       '/websocket': {
         target: 'ws://127.0.0.1:8765',
-        ws: true
+        ws: true,
       }
     }
   },

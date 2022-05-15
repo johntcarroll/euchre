@@ -54,6 +54,12 @@ const useGameStore = defineStore("game", {
     join(id) {
       this.router.push("game");
     },
+    attemptleave(socket) {
+      socket.send('leave');
+    },
+    leave(socket) {
+      //socket.send('leave');
+    },
     error(...msg) {
       console.error(msg.join(' '));
     },

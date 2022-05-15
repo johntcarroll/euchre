@@ -14,6 +14,7 @@ onMounted(() => {
   socketStore.listen("message", gameStore.parse);
 });
 onUnmounted(() => {
+  gameStore.attemptleave(socketStore.socket);
   socketStore.unlisten("message", gameStore.parse);
 });
 </script>
