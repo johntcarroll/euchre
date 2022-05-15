@@ -8,6 +8,7 @@ const lobbyStore = useLobbyStore();
 const socketStore = useSocketStore();
 onMounted(() => {
   socketStore.listen("message", lobbyStore.parse);
+  lobbyStore.redirectToGame = function(id) { router.push(`/play/${id}`); };
   lobbyStore.refresh(socketStore.socket);
 });
 onUnmounted(() => {
@@ -16,9 +17,11 @@ onUnmounted(() => {
 function refresh() {
   lobbyStore.refresh(socketStore.socket);
 }
+function create() {
+  lobbyStore.create(socketStore.socket);
+}
 function attemptjoin(id) {
-  lobbyStore.attemptjoin(socketStore.socket, id,
-    function() { router.push(`/play/${id}`) });
+  lobbyStore.attemptjoin(socketStore.socket, id);
 }
 </script>
 
@@ -26,7 +29,8 @@ function attemptjoin(id) {
   <div class="row">
     <div class="col-12">
       <h6>Lobby</h6>
-      <button @click="refresh">Refresh list</button>
+      <button @click="refresh">&#8635; Refresh list</button>
+      <button @click="create">&#43; Create new game</button>
       <ul>
 	<li v-for="game in lobbyStore.games">
 	  <a @click="attemptjoin(game)">{{game}}</a>

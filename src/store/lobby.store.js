@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 const useLobbyStore = defineStore("lobby", {
   state: () => ({
     games: [],
-    joinCallback: null,
+    redirectToGame: null,
     socket: null
   }),
   actions: {
@@ -14,8 +14,8 @@ const useLobbyStore = defineStore("lobby", {
       socket.send(`join ${id}`);
       this.joinCallback = callback;
     },
-    join(_id) {
-      this.joinCallback();
+    join(id) {
+      this.redirectToGame(id);
     },
     parse(e) {
       let data = e.data;
@@ -31,6 +31,9 @@ const useLobbyStore = defineStore("lobby", {
     refresh(socket) {
       this.games = [];
       socket.send("gameslist");
+    },
+    create(socket) {
+      socket.send("create");
     }
   }
 });

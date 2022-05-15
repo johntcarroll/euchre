@@ -63,6 +63,9 @@ const useGameStore = defineStore("game", {
     play(player, rank, suit) {
       this.game.activeCards[player] = { rank, suit };
     },
+    cardinhand(player, rank=null, suit=null) {
+      this.hand.push({ rank, suit });
+    },
     act(type, option) {
       try {
         let validAction = state.game.actions.find(
