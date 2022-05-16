@@ -101,8 +101,8 @@ onUnmounted(() => {
       </div>
     </div>
     <div id="Debug" class="col-4">
-      <Chat />
       <pre>{{ JSON.stringify(gameStore, null, 2) }}</pre>
+      <Chat />
     </div>
   </div>
 </template>
