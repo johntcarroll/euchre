@@ -10,10 +10,6 @@ const useLobbyStore = defineStore("lobby", {
     gameslist(game) {
       this.games.push(game);
     },
-    attemptjoin(socket, id, callback) {
-      socket.send(`join ${id}`);
-      this.joinCallback = callback;
-    },
     join(id) {
       this.redirectToGame(id);
     },

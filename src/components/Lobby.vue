@@ -21,7 +21,7 @@ function create() {
   lobbyStore.create(socketStore.socket);
 }
 function attemptjoin(id) {
-  lobbyStore.attemptjoin(socketStore.socket, id);
+  router.push(`/play/${id}`);
 }
 </script>
 

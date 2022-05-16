@@ -12,6 +12,7 @@ const socketStore = useSocketStore();
 onMounted(() => {
   if (route.params.uuid) gameStore.uuid = route.params.uuid;
   socketStore.listen("message", gameStore.parse);
+  gameStore.attemptjoin(socketStore.socket);
 });
 onUnmounted(() => {
   gameStore.attemptleave(socketStore.socket);
