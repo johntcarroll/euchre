@@ -20,6 +20,10 @@ onUnmounted(() => {
 });
 </script>
 <template>
+  <button @click="gameStore.attemptsit(socketStore.socket, 1)">Seat 1</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 2)">Seat 2</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 3)">Seat 3</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 4)">Seat 4</button>
   <div id="Game" class="row">
     <div class="game-board col-8">
       <div class="hand-container partner">
