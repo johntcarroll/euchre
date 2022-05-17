@@ -57,6 +57,9 @@ const useGameStore = defineStore("game", {
     attemptsit(socket, seat) {
       socket.send(`sit ${seat}`);
     },
+    attemptstand(socket) {
+      socket.send('stand');
+    },
     join(_id) {
       //join successful
       //this.router.push("game");

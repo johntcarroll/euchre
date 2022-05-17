@@ -20,10 +20,11 @@ onUnmounted(() => {
 });
 </script>
 <template>
-  <button @click="gameStore.attemptsit(socketStore.socket, 1)">Seat 1</button>
-  <button @click="gameStore.attemptsit(socketStore.socket, 2)">Seat 2</button>
-  <button @click="gameStore.attemptsit(socketStore.socket, 3)">Seat 3</button>
-  <button @click="gameStore.attemptsit(socketStore.socket, 4)">Seat 4</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 1)">Sit at seat 1</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 2)">Sit at seat 2</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 3)">Sit at seat 3</button>
+  <button @click="gameStore.attemptsit(socketStore.socket, 4)">Sit at seat 4</button>
+  <button @click="gameStore.attemptstand(socketStore.socket)">Stand up</button>
   <div id="Game" class="row">
     <div class="game-board col-8">
       <div class="hand-container partner">
