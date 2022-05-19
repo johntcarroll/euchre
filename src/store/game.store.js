@@ -6,22 +6,10 @@ const useGameStore = defineStore("game", {
     socket: null,
     game: {
       activeCards: {
-        self: {
-	  suit: "clubs",
-	  rank: "9",
-	},
-        left: {
-	  suit: "spades",
-	  rank: "10",
-	},
-        partner: {
-	  suit: "hearts",
-	  rank: "A",
-	},
-        right: {
-	  suit: "diams",
-	  rank: "3",
-	},
+        p1: {},
+        p2: {},
+        p3: {},
+        p4: {},
       },
       trickCounts: {
         us: 0,
@@ -34,8 +22,13 @@ const useGameStore = defineStore("game", {
       actionOn: null,
       trumpSuit: null,
       actions: [],
-      hand: [],
-      topKitty: null,
+      hands: {
+        p1: [],
+        p2: [],
+        p3: [],
+        p4: [],
+      },
+      kitty: [],
       dealer: null,
     },
   }),
@@ -79,8 +72,11 @@ const useGameStore = defineStore("game", {
     play(player, rank, suit) {
       this.game.activeCards[player] = { rank, suit };
     },
-    cardinhand(player, rank=null, suit=null) {
-      this.hand.push({ rank, suit });
+    cardinhand(playernumber, rank=null, suit=null) {
+      this.game.hands[`p${playernumber}`].push({ rank, suit });
+    },
+    kitty(rank=null, suit=null) {
+      this.game.kitty.push({ rank, suit });
     },
     act(type, option) {
       try {

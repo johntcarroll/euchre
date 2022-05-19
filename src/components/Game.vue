@@ -27,69 +27,49 @@ onUnmounted(() => {
   <button @click="gameStore.attemptstand(socketStore.socket)">Stand up</button>
   <div id="Game" class="row">
     <div class="game-board col-8">
-      <div class="hand-container partner">
+      <div class="hand-container p3">
         <Hand handType="card-table">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p3" :rank="rank" :suit="suit" />
         </Hand>
       </div>
-      <div class="active-card partner">
+      <div class="active-card p3">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.partner.rank" :suit="gameStore.game.activeCards.partner.suit" />
+          <Card :rank="gameStore.game.activeCards.p3.rank" :suit="gameStore.game.activeCards.p3.suit" />
         </Hand>
       </div>
-      <div class="hand-container opponent-left">
+      <div class="hand-container p2">
         <Hand handType="card-table">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p2" :rank="rank" :suit="suit" />
         </Hand>
       </div>
-      <div class="active-card opponent-left">
+      <div class="active-card p2">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.left.rank" :suit="gameStore.game.activeCards.left.suit" />
+          <Card :rank="gameStore.game.activeCards.p2.rank" :suit="gameStore.game.activeCards.p2.suit" />
         </Hand>
       </div>
-      <div class="hand-container opponent-right">
+      <div class="hand-container p4">
         <Hand handType="card-table">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p4" :rank="rank" :suit="suit" />
         </Hand>
       </div>
-      <div class="active-card opponent-right">
+      <div class="active-card p4">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.right.rank" :suit="gameStore.game.activeCards.right.suit" />
+          <Card :rank="gameStore.game.activeCards.p4.rank" :suit="gameStore.game.activeCards.p4.suit" />
         </Hand>
       </div>
-      <div class="hand-container self">
+      <div class="hand-container p1">
         <Hand handType="card-table">
-          <Card rank="9" suit="hearts" playable />
-          <Card rank="a" suit="spades" playable />
-          <Card rank="k" suit="diams" playable />
-          <Card rank="q" suit="clubs" playable />
-          <Card rank="j" suit="clubs" playable />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p1" :rank="rank" :suit="suit" />
         </Hand>
       </div>
-      <div class="active-card self">
+      <div class="active-card p1">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.self.rank" :suit="gameStore.game.activeCards.self.suit" />
+          <Card :rank="gameStore.game.activeCards.p1.rank" :suit="gameStore.game.activeCards.p1.suit" />
         </Hand>
       </div>
       <div class="kitty">
         <Hand handType="deck">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card rank="9" suit="hearts" />
+          <Card v-for="{rank, suit} in gameStore.game.kitty" :rank="rank" :suit="suit" />
         </Hand>
       </div>
       <div class="hand-stats">
@@ -128,45 +108,45 @@ float: right;
   position: absolute;
 }
 
-.hand-container.self {
+.hand-container.p1 {
   bottom: 0;
   left: 200px;
 }
 
-.active-card.self {
+.active-card.p1 {
   bottom: 150px;
   left: 350px;
 }
 
-.hand-container.partner {
+.hand-container.p3 {
   top: -20px;
   left: 200px;
 }
 
-.active-card.partner {
+.active-card.p3 {
   top: 130px;
   left: 350px;
 }
 
-.hand-container.opponent-left {
+.hand-container.p2 {
   top: 325px;
   left: -145px;
   transform: rotate(90deg);
 }
 
-.active-card.opponent-left {
+.active-card.p2 {
   top: 325px;
   left: 155px;
   transform: rotate(90deg);
 }
 
-.hand-container.opponent-right {
+.hand-container.p4 {
   top: 325px;
   right: -145px;
   transform: rotate(90deg);
 }
 
-.active-card.opponent-right {
+.active-card.p4 {
   top: 325px;
   right: 155px;
   transform: rotate(270deg);

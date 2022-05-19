@@ -42,7 +42,7 @@ function play() {
 <template>
   <li>
     <component :is="playable ? 'a' : 'div'" :class="cardClass" @click="play">
-      <span class="rank" v-if="props.rank">{{ props.rank.toUpperCase() }}</span>
+      <span class="rank" v-if="props.rank">{{ props.rank }}</span>
       <span class="suit" v-if="props.suit" v-html="unicodeSuit"></span>
     </component>
   </li>

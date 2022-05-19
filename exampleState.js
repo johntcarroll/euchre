@@ -1,19 +1,19 @@
 let state = {
     gameId: "123456",
     activeCards: {
-        self: {
+        p1: {
 	  suit: "spades",
 	  rank: "10",
 	},
-        left: {
+        p2: {
 	  suit: "spades",
 	  rank: "10",
 	},
-        partner: {
+        p3: {
 	  suit: "spades",
 	  rank: "10",
 	},
-        right: {
+        p4: {
 	  suit: "spades",
 	  rank: "10",
 	},
@@ -35,7 +35,113 @@ let state = {
         {type: "bid2", options: ["y", "n"]},
         {type: "trump-suit-selection", options: ["hearts", "clubs", "spades", "diamonds"]},
     ],
-    hand: ["Ad", "Kd", "Td", "2d"],
-    topKitty: "Ad",
-    dealer: "2",
+    hands: {
+      p1: [
+        {
+	  "rank": null,
+	  "suit": null
+	},
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        }
+      ],
+      p2: [
+        {
+	  "rank": null,
+	  "suit": null
+	},
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        }
+      ],
+      p3: [
+        {
+	  "rank": null,
+	  "suit": null
+	},
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        },
+        {
+          "rank": null,
+          "suit": null
+        }
+      ],
+      p4: [
+        {
+	  "rank": "ace",
+	  "suit": "clubs"
+	},
+        {
+          "rank": "king",
+          "suit": "diamonds"
+        },
+        {
+          "rank": "king",
+          "suit": "hearts"
+        },
+        {
+          "rank": "queen",
+          "suit": "clubs"
+        },
+        {
+          "rank": "jack",
+          "suit": "spades"
+        }
+      ],
+    },
+    kitty: [
+      {
+	rank: null,
+        suit: null
+      },
+      {
+	rank: null,
+        suit: null
+      },
+      {
+	rank: null,
+        suit: null
+      },
+      {
+	rank: 9,
+        suit: "hearts"
+      }
+    ],
+    dealer: 2,
 }
