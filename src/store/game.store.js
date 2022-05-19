@@ -30,6 +30,7 @@ const useGameStore = defineStore("game", {
       },
       kitty: [],
       dealer: null,
+      seat: null,
     },
   }),
   actions: {
@@ -49,6 +50,9 @@ const useGameStore = defineStore("game", {
     },
     attemptsit(socket, seat) {
       socket.send(`sit ${seat}`);
+    },
+    sit(seat) {
+      this.game.seat = seat;
     },
     attemptstand(socket) {
       socket.send('stand');

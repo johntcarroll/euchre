@@ -29,7 +29,7 @@ onUnmounted(() => {
     <div class="game-board col-8">
       <div class="hand-container p3">
         <Hand handType="card-table">
-          <Card v-for="{rank, suit} in gameStore.game.hands.p3" :rank="rank" :suit="suit" />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p3" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 3" />
         </Hand>
       </div>
       <div class="active-card p3">
@@ -39,7 +39,7 @@ onUnmounted(() => {
       </div>
       <div class="hand-container p2">
         <Hand handType="card-table">
-          <Card v-for="{rank, suit} in gameStore.game.hands.p2" :rank="rank" :suit="suit" />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p2" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 2"/>
         </Hand>
       </div>
       <div class="active-card p2">
@@ -49,7 +49,7 @@ onUnmounted(() => {
       </div>
       <div class="hand-container p4">
         <Hand handType="card-table">
-          <Card v-for="{rank, suit} in gameStore.game.hands.p4" :rank="rank" :suit="suit" />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p4" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 4"/>
         </Hand>
       </div>
       <div class="active-card p4">
@@ -59,7 +59,7 @@ onUnmounted(() => {
       </div>
       <div class="hand-container p1">
         <Hand handType="card-table">
-          <Card v-for="{rank, suit} in gameStore.game.hands.p1" :rank="rank" :suit="suit" />
+          <Card v-for="{rank, suit} in gameStore.game.hands.p1" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 1"/>
         </Hand>
       </div>
       <div class="active-card p1">
