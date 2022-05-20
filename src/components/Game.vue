@@ -87,16 +87,13 @@ onUnmounted(() => {
       </div>
     </div>
     <div id="Debug" class="col-4">
-      <pre>{{ JSON.stringify(gameStore, null, 2) }}</pre>
       <Chat />
+      <pre>{{ JSON.stringify(gameStore, null, 2) }}</pre>
     </div>
   </div>
 </template>
 
 <style scoped>
-#Debug {
-float: right;
-}
 .game-board {
   position: relative;
   background-color: #216c41;

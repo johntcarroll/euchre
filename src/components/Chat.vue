@@ -25,12 +25,11 @@ function submit() {
 }
 </script>
 <style scoped>
-#Chat {
-  float: right;
+#Chat form, #Chat textarea, #Chat input {
   width: 100%;
 }
-#Chat form, #Chat textarea {
-  width: 100%;
+#Chat textarea {
+  height: 200px;
 }
 </style>
 <template>
