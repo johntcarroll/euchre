@@ -64,8 +64,8 @@ const useGameStore = defineStore("game", {
     attemptleave(socket) {
       socket.send('leave');
     },
-    leave(socket) {
-      //socket.send('leave');
+    leave() {
+      this.$reset();
     },
     error(...msg) {
       console.error(msg.join(' '));

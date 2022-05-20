@@ -17,6 +17,7 @@ onMounted(() => {
 onUnmounted(() => {
   gameStore.attemptleave(socketStore.socket);
   socketStore.unlisten("message", gameStore.parse);
+  gameStore.leave();
 });
 </script>
 <template>

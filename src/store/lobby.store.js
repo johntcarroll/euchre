@@ -21,7 +21,7 @@ const useLobbyStore = defineStore("lobby", {
     },
     debug(fn) {
       return function(...params) {
-	console.debug("Dropping call to", fn, params, "from game store")
+	console.debug("Dropping call to", fn, params, "from lobby store")
       };
     },
     refresh(socket) {
