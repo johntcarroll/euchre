@@ -27,7 +27,7 @@ onUnmounted(() => {
   <button @click="gameStore.attemptsit(socketStore.socket, 4)">Sit at seat 4</button>
   <button @click="gameStore.attemptstand(socketStore.socket)">Stand up</button>
   <div id="Game" class="row">
-    <div class="game-board col-8">
+    <div class="game-board col-xl-8">
       <div class="hand-container p3">
         <Hand handType="card-table">
           <Card v-for="{rank, suit} in gameStore.game.hands.p3" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 3" />
@@ -86,7 +86,7 @@ onUnmounted(() => {
         <div>Thier Points: 0</div>
       </div>
     </div>
-    <div id="Debug" class="col-4">
+    <div id="Debug" class="col-xl-4">
       <Chat />
       <pre>{{ JSON.stringify(gameStore, null, 2) }}</pre>
     </div>
@@ -98,7 +98,6 @@ onUnmounted(() => {
   position: relative;
   background-color: #216c41;
   height: 800px;
-  width: 800px;
 }
 
 .hand-container,
