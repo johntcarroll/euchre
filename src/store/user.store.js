@@ -21,8 +21,8 @@ const useUserStore = defineStore("user", {
     attemptsetname(socket, toSet) {
       socket.send(`setname ${toSet}`);
     },
-    setname(name) {
-      this.name = this.possibleName = name;
+    setname(...name) {
+      this.name = this.possibleName = name.join(' ');
     },
   }
 });
