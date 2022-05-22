@@ -35,7 +35,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card p3">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.p3.rank" :suit="gameStore.game.activeCards.p3.suit" />
+          <Card v-if="gameStore.game.activeCards.p3" :rank="gameStore.game.activeCards.p3.rank" :suit="gameStore.game.activeCards.p3.suit" />
         </Hand>
       </div>
       <div class="hand-container p2">
@@ -45,7 +45,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card p2">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.p2.rank" :suit="gameStore.game.activeCards.p2.suit" />
+          <Card v-if="gameStore.game.activeCards.p2" :rank="gameStore.game.activeCards.p2.rank" :suit="gameStore.game.activeCards.p2.suit" />
         </Hand>
       </div>
       <div class="hand-container p4">
@@ -55,7 +55,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card p4">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.p4.rank" :suit="gameStore.game.activeCards.p4.suit" />
+          <Card v-if="gameStore.game.activeCards.p4" :rank="gameStore.game.activeCards.p4.rank" :suit="gameStore.game.activeCards.p4.suit" />
         </Hand>
       </div>
       <div class="hand-container p1">
@@ -65,7 +65,7 @@ onUnmounted(() => {
       </div>
       <div class="active-card p1">
         <Hand handType="card-table">
-          <Card :rank="gameStore.game.activeCards.p1.rank" :suit="gameStore.game.activeCards.p1.suit" />
+          <Card v-if="gameStore.game.activeCards.p1" :rank="gameStore.game.activeCards.p1.rank" :suit="gameStore.game.activeCards.p1.suit" />
         </Hand>
       </div>
       <div class="kitty">

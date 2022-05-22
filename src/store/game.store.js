@@ -6,10 +6,10 @@ const useGameStore = defineStore("game", {
     socket: null,
     game: {
       activeCards: {
-        p1: {},
-        p2: {},
-        p3: {},
-        p4: {},
+        p1: null,
+        p2: null,
+        p3: null,
+        p4: null,
       },
       trickCounts: {
         us: 0,
@@ -30,7 +30,12 @@ const useGameStore = defineStore("game", {
       },
       kitty: [],
       dealer: null,
-      seat: null,
+      seats: {
+        p1: null,
+        p2: null,
+        p3: null,
+        p4: null,
+      },
     },
   }),
   actions: {
@@ -51,8 +56,11 @@ const useGameStore = defineStore("game", {
     attemptsit(socket, seat) {
       socket.send(`sit ${seat}`);
     },
-    sit(seat) {
-      this.game.seat = seat;
+    sit(player, seat) {
+      this.game.seats[seat] = player;
+    },
+    stand(_player, seat) {
+      this.game.seats[seat] = null;
     },
     attemptstand(socket) {
       socket.send('stand');

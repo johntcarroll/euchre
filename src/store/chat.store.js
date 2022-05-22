@@ -23,12 +23,17 @@ const useChatStore = defineStore("chat", {
     },
     say(speaker, ...words) {
       words = words.join(' ');
-      console.debug("speaker:", speaker, "words:", words);
       this.buffer = this.buffer + [`${speaker}: ${words}\n`];
     },
     send(socket, input) {
       socket.send(`say ${input}`);
     },
+    sit(player, seat) {
+      this.buffer = this.buffer + [`>> ${player} sits at seat ${seat}\n`];
+    },
+    stand(player, _seat) {
+      this.buffer = this.buffer + [`>> ${player} stands up\n`];
+    }
   }
 });
 export { useChatStore };
