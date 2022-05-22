@@ -4,6 +4,7 @@ const useUserStore = defineStore("user", {
   state: () => ({
     id: null,
     name: null,
+    possibleName: null,
   }),
   actions: {
     parse(e) {
@@ -21,7 +22,7 @@ const useUserStore = defineStore("user", {
       socket.send(`setname ${toSet}`);
     },
     setname(name) {
-      this.name = name;
+      this.name = this.possibleName = name;
     },
   }
 });

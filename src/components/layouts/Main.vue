@@ -1,10 +1,25 @@
 <script setup>
 import Sidebar from "../nav/Sidebar.vue";
+import { onMounted, onUnmounted } from "vue";
 import { useSocketStore } from "../../store/socket.store";
+import { useUserStore } from "../../store/user.store";
 const socketStore = useSocketStore();
+const userStore = useUserStore();
+onMounted(() => {
+  socketStore.listen("message", userStore.parse);
+});
+onUnmounted(() => {
+  socketStore.listen("message", userStore.parse);
+});
 </script>
 <template>
   <div class="container-fluid">
+  <nav class="navbar navbar-light bg-light">
+    🂫 Euchre
+    <div class="my-2">
+      Hello, {{userStore.name}}!
+    </div>
+  </nav>
     <div class="row">
       <div class="col-1">
         <Sidebar />

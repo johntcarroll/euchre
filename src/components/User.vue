@@ -1,15 +1,9 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref } from "vue";
 import { useSocketStore } from "../store/socket.store";
 import { useUserStore } from "../store/user.store";
 const socketStore = useSocketStore();
 const userStore = useUserStore();
-onMounted(() => {
-  socketStore.listen("message", userStore.parse);
-});
-onUnmounted(() => {
-  socketStore.listen("message", userStore.parse);
-});
 </script>
 
 <template>
@@ -17,9 +11,9 @@ onUnmounted(() => {
     <div class="col-12">
       <h6>User</h6>
     </div>
-    <form @submit.prevent="userStore.attemptsetname(socketStore.socket, userStore.name)">
+    <form @submit.prevent="userStore.attemptsetname(socketStore.socket, userStore.possibleName)">
       <label>Name
-        <input id="text-input" v-model="userStore.name" type="text" placeholder="Username">
+        <input id="text-input" v-model="userStore.possibleName" type="text" placeholder="Username">
       </label>
       <input type="submit" value="Send">
     </form>
