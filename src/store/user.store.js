@@ -5,6 +5,7 @@ const useUserStore = defineStore("user", {
     id: null,
     name: null,
     possibleName: null,
+    idNames: {},
   }),
   actions: {
     parse(e) {
@@ -20,6 +21,9 @@ const useUserStore = defineStore("user", {
     },
     attemptsetname(socket, toSet) {
       socket.send(`setname ${toSet}`);
+    },
+    id(id) {
+      this.id = id;
     },
     setname(...name) {
       this.name = this.possibleName = name.join(' ');

@@ -12,6 +12,10 @@ const userStore = useUserStore();
       <h6>User</h6>
     </div>
     <form @submit.prevent="userStore.attemptsetname(socketStore.socket, userStore.possibleName)">
+      <p>
+      <label>ID</label>
+	{{userStore.id}}
+      </p>
       <label>Name
         <input id="text-input" v-model="userStore.possibleName" type="text" placeholder="Username">
       </label>
