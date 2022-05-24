@@ -36,6 +36,7 @@ const useUserStore = defineStore("user", {
   },
   getters: {
     name: (state) => state.idNames[state.sessionId],
+    nameFromId: (state) => (id) => state.idNames[id] || id,
   }
 });
 export { useUserStore };
