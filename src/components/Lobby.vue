@@ -9,16 +9,16 @@ const socketStore = useSocketStore();
 onMounted(() => {
   socketStore.listen("message", lobbyStore.parse);
   lobbyStore.redirectToGame = function(id) { router.push(`/play/${id}`); };
-  lobbyStore.refresh(socketStore.socket);
+  lobbyStore.refresh();
 });
 onUnmounted(() => {
   socketStore.unlisten("message", lobbyStore.parse);
 });
 function refresh() {
-  lobbyStore.refresh(socketStore.socket);
+  lobbyStore.refresh();
 }
 function create() {
-  lobbyStore.create(socketStore.socket);
+  lobbyStore.create();
 }
 function attemptjoin(id) {
   router.push(`/play/${id}`);

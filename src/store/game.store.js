@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
+import { useSocketStore } from "./socket.store";
 
 const useGameStore = defineStore("game", {
   state: () => ({
     uuid: null,
-    socket: null,
+    socketStore: useSocketStore(),
     game: {
       activeCards: {
         p1: null,
@@ -38,6 +39,9 @@ const useGameStore = defineStore("game", {
       },
     },
   }),
+  getters: {
+    socket: (store) => store.socketStore.socket,
+  },
   actions: {
     parse(e) {
       let data = e.data;
@@ -50,11 +54,11 @@ const useGameStore = defineStore("game", {
 	console.debug("Dropping call to", fn, params, "from game store")
       };
     },
-    attemptjoin(socket) {
-      socket.send(`join ${this.uuid}`);
+    attemptjoin() {
+      this.socket.send(`join ${this.uuid}`);
     },
-    attemptsit(socket, seat) {
-      socket.send(`sit ${seat}`);
+    attemptsit(seat) {
+      this.socket.send(`sit ${seat}`);
     },
     sit(player, seat) {
       this.game.seats[seat] = player;
@@ -62,15 +66,15 @@ const useGameStore = defineStore("game", {
     stand(_player, seat) {
       this.game.seats[seat] = null;
     },
-    attemptstand(socket) {
-      socket.send('stand');
+    attemptstand() {
+      this.socket.send('stand');
     },
     join(_id) {
       //join successful
       //this.router.push("game");
     },
-    attemptleave(socket) {
-      socket.send('leave');
+    attemptleave() {
+      this.socket.send('leave');
     },
     leave() {
       this.$reset();
@@ -79,7 +83,7 @@ const useGameStore = defineStore("game", {
       console.error(msg.join(' '));
     },
     attemptplay(socket, rank, suit) {
-      socket.send(`play ${rank} ${suit}`);
+      this.socket.send(`play ${rank} ${suit}`);
     },
     play(player, rank, suit) {
       this.game.activeCards[player] = { rank, suit };

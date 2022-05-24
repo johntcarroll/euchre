@@ -1,11 +1,15 @@
 import { defineStore } from "pinia";
+import { useSocketStore } from "./socket.store";
 
 const useLobbyStore = defineStore("lobby", {
   state: () => ({
     games: [],
     redirectToGame: null,
-    socket: null
+    socketStore: useSocketStore(),
   }),
+  getters: {
+    socket: (store) => store.socketStore.socket,
+  },
   actions: {
     gameslist(game) {
       this.games.push(game);
@@ -24,12 +28,12 @@ const useLobbyStore = defineStore("lobby", {
 	console.debug("Dropping call to", fn, params, "from lobby store")
       };
     },
-    refresh(socket) {
+    refresh() {
       this.games = [];
-      socket.send("gameslist");
+      this.socket.send("gameslist");
     },
-    create(socket) {
-      socket.send("create");
+    create() {
+      this.socket.send("create");
     }
   }
 });

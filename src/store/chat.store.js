@@ -1,11 +1,16 @@
 import { defineStore } from "pinia";
+import { useSocketStore } from "./socket.store";
 import { useUserStore } from "./user.store";
 
 const useChatStore = defineStore("chat", {
   state: () => ({
     buffer: [],
+    socketStore: useSocketStore(),
     userStore: useUserStore(),
   }),
+  getters: {
+    socket: (store) => store.socketStore.socket,
+  },
   actions: {
     parse(e) {
       let data = e.data;
@@ -27,8 +32,8 @@ const useChatStore = defineStore("chat", {
       words = words.join(' ');
       this.buffer = this.buffer + [`${this.userStore.nameFromId(speaker)}: ${words}\n`];
     },
-    send(socket, input) {
-      socket.send(`say ${input}`);
+    send(input) {
+      this.socket.send(`say ${input}`);
     },
     sit(player, seat) {
       this.buffer = this.buffer + [`>> ${this.userStore.nameFromId(player)} sits at seat ${seat}\n`];

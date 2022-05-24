@@ -12,20 +12,20 @@ const socketStore = useSocketStore();
 onMounted(() => {
   if (route.params.uuid) gameStore.uuid = route.params.uuid;
   socketStore.listen("message", gameStore.parse);
-  gameStore.attemptjoin(socketStore.socket);
+  gameStore.attemptjoin();
 });
 onUnmounted(() => {
-  gameStore.attemptleave(socketStore.socket);
+  gameStore.attemptleave();
   socketStore.unlisten("message", gameStore.parse);
   gameStore.leave();
 });
 </script>
 <template>
-  <button @click="gameStore.attemptsit(socketStore.socket, 1)">Sit at seat 1</button>
-  <button @click="gameStore.attemptsit(socketStore.socket, 2)">Sit at seat 2</button>
-  <button @click="gameStore.attemptsit(socketStore.socket, 3)">Sit at seat 3</button>
-  <button @click="gameStore.attemptsit(socketStore.socket, 4)">Sit at seat 4</button>
-  <button @click="gameStore.attemptstand(socketStore.socket)">Stand up</button>
+  <button @click="gameStore.attemptsit(1)">Sit at seat 1</button>
+  <button @click="gameStore.attemptsit(2)">Sit at seat 2</button>
+  <button @click="gameStore.attemptsit(3)">Sit at seat 3</button>
+  <button @click="gameStore.attemptsit(4)">Sit at seat 4</button>
+  <button @click="gameStore.attemptstand()">Stand up</button>
   <div id="Game" class="row">
     <div class="game-board col-xl-8">
       <div class="hand-container p3">

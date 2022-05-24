@@ -1,11 +1,9 @@
 <script setup>
 import { useGameStore } from "../../store/game.store";
-import { useSocketStore } from "../../store/socket.store";
 import config from "../../config";
 import { computed } from "@vue/reactivity";
 
 const gameStore = useGameStore();
-const socketStore = useSocketStore();
 const props = defineProps({
   rank: {
     type: String,
@@ -36,7 +34,7 @@ const cardClass = computed(() => ({
 
 const unicodeSuit = computed(() => `&${props.suit};`);
 function play() {
-  gameStore.attemptplay(socketStore.socket, props.rank, props.suit);
+  gameStore.attemptplay(props.rank, props.suit);
 }
 </script>
 <template>

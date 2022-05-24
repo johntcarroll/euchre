@@ -20,7 +20,7 @@ onUnmounted(() => {
 });
 const text = ref('');
 function submit() {
-  chatStore.send(socketStore.socket, text.value);
+  chatStore.send(text.value);
   text.value = '';
 }
 </script>
