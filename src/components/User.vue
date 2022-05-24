@@ -14,7 +14,7 @@ const userStore = useUserStore();
     <form @submit.prevent="userStore.attemptsetname(socketStore.socket, userStore.possibleName)">
       <p>
       <label>ID</label>
-	{{userStore.id}}
+	{{userStore.sessionId}}
       </p>
       <label>Name
         <input id="text-input" v-model="userStore.possibleName" type="text" placeholder="Username">

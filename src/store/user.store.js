@@ -2,8 +2,7 @@ import { defineStore } from "pinia";
 
 const useUserStore = defineStore("user", {
   state: () => ({
-    id: null,
-    name: null,
+    sessionId: null,
     possibleName: null,
     idNames: {},
   }),
@@ -23,11 +22,20 @@ const useUserStore = defineStore("user", {
       socket.send(`setname ${toSet}`);
     },
     id(id) {
-      this.id = id;
+      this.sessionId = id;
+      if (this.idNames[id]) {
+        this.possibleName = this.idNames[id];
+      }
     },
-    setname(...name) {
-      this.name = this.possibleName = name.join(' ');
+    is(id, ...name) {
+      this.idNames[id] = name = name.join(' ');
+      if (id == this.sessionId) {
+        this.possibleName = name;
+      }
     },
+  },
+  getters: {
+    name: (state) => state.idNames[state.sessionId],
   }
 });
 export { useUserStore };
