@@ -61,10 +61,10 @@ const useGameStore = defineStore("game", {
       this.socket.send(`sit ${seat}`);
     },
     sit(player, seat) {
-      this.game.seats[seat] = player;
+      this.game.seats[`p${seat}`] = player;
     },
     stand(_player, seat) {
-      this.game.seats[seat] = null;
+      this.game.seats[`p${seat}`] = null;
     },
     attemptstand() {
       this.socket.send('stand');

@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted } from "vue";
 import { useGameStore } from "../store/game.store";
 import { useSocketStore } from "../store/socket.store";
+import { useUserStore } from "../store/user.store";
 import { useRoute } from "vue-router";
 import Hand from "./cards/Hand.vue";
 import Card from "./cards/Card.vue";
@@ -9,6 +10,7 @@ import Chat from "./Chat.vue";
 const route = useRoute();
 const gameStore = useGameStore();
 const socketStore = useSocketStore();
+const userStore = useUserStore();
 onMounted(() => {
   if (route.params.uuid) gameStore.uuid = route.params.uuid;
   socketStore.listen("message", gameStore.parse);
@@ -34,7 +36,7 @@ onUnmounted(() => {
         </Hand>
       </div>
       <div class="player-name p3">
-        Player 3 name
+        Player {{userStore.nameFromId(gameStore.game.seats.p3)}}
       </div>
       <div class="active-card p3">
         <Hand handType="card-table">
@@ -47,7 +49,7 @@ onUnmounted(() => {
         </Hand>
       </div>
       <div class="player-name p2">
-        Player 2 name
+        Player {{userStore.nameFromId(gameStore.game.seats.p2)}}
       </div>
       <div class="active-card p2">
         <Hand handType="card-table">
@@ -60,7 +62,7 @@ onUnmounted(() => {
         </Hand>
       </div>
       <div class="player-name p4">
-        Player 4 name
+        Player {{userStore.nameFromId(gameStore.game.seats.p4)}}
       </div>
       <div class="active-card p4">
         <Hand handType="card-table">
@@ -73,7 +75,7 @@ onUnmounted(() => {
         </Hand>
       </div>
       <div class="player-name p1">
-        Player 1 name
+        Player {{userStore.nameFromId(gameStore.game.seats.p1)}}
       </div>
       <div class="active-card p1">
         <Hand handType="card-table">
