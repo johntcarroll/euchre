@@ -33,6 +33,9 @@ onUnmounted(() => {
           <Card v-for="{rank, suit} in gameStore.game.hands.p3" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 3" />
         </Hand>
       </div>
+      <div class="player-name p3">
+        Player 3 name
+      </div>
       <div class="active-card p3">
         <Hand handType="card-table">
           <Card v-if="gameStore.game.activeCards.p3" :rank="gameStore.game.activeCards.p3.rank" :suit="gameStore.game.activeCards.p3.suit" />
@@ -42,6 +45,9 @@ onUnmounted(() => {
         <Hand handType="card-table">
           <Card v-for="{rank, suit} in gameStore.game.hands.p2" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 2"/>
         </Hand>
+      </div>
+      <div class="player-name p2">
+        Player 2 name
       </div>
       <div class="active-card p2">
         <Hand handType="card-table">
@@ -53,6 +59,9 @@ onUnmounted(() => {
           <Card v-for="{rank, suit} in gameStore.game.hands.p4" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 4"/>
         </Hand>
       </div>
+      <div class="player-name p4">
+        Player 4 name
+      </div>
       <div class="active-card p4">
         <Hand handType="card-table">
           <Card v-if="gameStore.game.activeCards.p4" :rank="gameStore.game.activeCards.p4.rank" :suit="gameStore.game.activeCards.p4.suit" />
@@ -62,6 +71,9 @@ onUnmounted(() => {
         <Hand handType="card-table">
           <Card v-for="{rank, suit} in gameStore.game.hands.p1" :rank="rank" :suit="suit" :playable="gameStore.game.seat == 1"/>
         </Hand>
+      </div>
+      <div class="player-name p1">
+        Player 1 name
       </div>
       <div class="active-card p1">
         <Hand handType="card-table">
@@ -100,13 +112,23 @@ onUnmounted(() => {
   height: 800px;
 }
 
+.player-name {
+  color: white;
+}
+
 .hand-container,
-.active-card {
+.active-card,
+.player-name {
   position: absolute;
 }
 
-.hand-container.p1 {
+.player-name.p1 {
   bottom: 0;
+  left: 350px;
+}
+
+.hand-container.p1 {
+  bottom: 10px;
   left: 200px;
 }
 
@@ -115,8 +137,13 @@ onUnmounted(() => {
   left: 350px;
 }
 
+.player-name.p3 {
+  top: 0px;
+  left: 350px;
+}
+
 .hand-container.p3 {
-  top: -20px;
+  top: 0px;
   left: 200px;
 }
 
@@ -125,9 +152,15 @@ onUnmounted(() => {
   left: 350px;
 }
 
+.player-name.p2 {
+  top: 325px;
+  left: -45px;
+  transform: rotate(90deg);
+}
+
 .hand-container.p2 {
   top: 325px;
-  left: -145px;
+  left: -115px;
   transform: rotate(90deg);
 }
 
@@ -137,10 +170,16 @@ onUnmounted(() => {
   transform: rotate(90deg);
 }
 
+.player-name.p4 {
+  top: 325px;
+  right: -45px;
+  transform: rotate(270deg);
+}
+
 .hand-container.p4 {
   top: 325px;
-  right: -145px;
-  transform: rotate(90deg);
+  right: -125px;
+  transform: rotate(270deg);
 }
 
 .active-card.p4 {
