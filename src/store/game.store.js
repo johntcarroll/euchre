@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import { useSocketStore } from "./socket.store";
+import { useUserStore } from "./user.store";
 
 const useGameStore = defineStore("game", {
   state: () => ({
     uuid: null,
     socketStore: useSocketStore(),
+    userStore: useUserStore(),
     game: {
       activeCards: {
         p1: null,
@@ -31,6 +33,8 @@ const useGameStore = defineStore("game", {
       },
       kitty: [],
       dealer: null,
+      bidder: null,
+      iAmBidder: null,
       seats: {
         p1: null,
         p2: null,
@@ -82,8 +86,19 @@ const useGameStore = defineStore("game", {
     error(...msg) {
       console.error(msg.join(' '));
     },
-    attemptplay(socket, rank, suit) {
+    attemptplay(rank, suit) {
       this.socket.send(`play ${rank} ${suit}`);
+    },
+    attemptbid(yorn) {
+      this.socket.send(`bid ${yorn}`);
+    },
+    bidder(seat) {
+      this.game.bidder = seat;
+      this.game.iAmBidder =
+        this.game.seats[`p${seat}`] == this.userStore.sessionId;
+    },
+    bid() {
+      this.game.iAmBidder = true;
     },
     play(player, rank, suit) {
       this.game.activeCards[player] = { rank, suit };
