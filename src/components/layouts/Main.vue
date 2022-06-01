@@ -29,11 +29,13 @@ onUnmounted(() => {
         <Sidebar />
       </div>
       <div class="col-11">
-	<div class="row">
+	<div v-if="flashStore.buffer.length > 0" class="row">
           <div class="col-12">
             <ul>
-              <li v-for="message in flashStore.buffer">
+	      <span class="clear" @click="flashStore.clearMessages">✕</span>
+              <li v-for="(message, i) in flashStore.buffer">
                 {{message}}
+                <span class="clear" @click="flashStore.clearMessage(i)">✕</span>
               </li>
             </ul>
 	  </div>
@@ -47,6 +49,9 @@ onUnmounted(() => {
   </div>
 </template>
 <style scoped>
+.clear {
+  cursor: pointer;
+}
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
