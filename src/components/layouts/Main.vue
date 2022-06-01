@@ -29,15 +29,17 @@ onUnmounted(() => {
         <Sidebar />
       </div>
       <div class="col-11">
-	<div v-if="flashStore.buffer.length > 0" class="row">
-          <div class="col-12">
+	<div v-if="flashStore.buffer.length > 0" class="col-12">
+          <div class="row alert alert-danger" role="alert">
+            <div class="col-11">
             <ul>
-	      <span class="clear" @click="flashStore.clearMessages">✕</span>
               <li v-for="(message, i) in flashStore.buffer">
                 {{message}}
                 <span class="clear" @click="flashStore.clearMessage(i)">✕</span>
               </li>
             </ul>
+	    </div>
+	    <div class="clear col-1" @click="flashStore.clearMessages">✕</div>
 	  </div>
 	</div>
         <div v-if="!socketStore.connected" class="lds-dual-ring">
