@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import { useSocketStore } from "./socket.store";
+import { useRouter } from 'vue-router';
 
 const useLobbyStore = defineStore("lobby", {
   state: () => ({
     games: [],
     redirectToGame: null,
+    router: useRouter(),
     socketStore: useSocketStore(),
   }),
   getters: {
@@ -34,7 +36,13 @@ const useLobbyStore = defineStore("lobby", {
     },
     create() {
       this.socket.send("create");
-    }
+    },
+    attemptjoin(id) {
+      this.router.push(`/play/${id}`);
+    },
+    join(id) {
+      this.router.push(`/play/${id}`);
+    },
   }
 });
 export { useLobbyStore };

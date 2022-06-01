@@ -1,15 +1,19 @@
 <script setup>
 import Sidebar from "../nav/Sidebar.vue";
 import { onMounted, onUnmounted } from "vue";
+import { useFlashStore } from "../../store/flash.store";
 import { useSocketStore } from "../../store/socket.store";
 import { useUserStore } from "../../store/user.store";
+const flashStore = useFlashStore();
 const socketStore = useSocketStore();
 const userStore = useUserStore();
 onMounted(() => {
+  socketStore.listen("message", flashStore.parse);
   socketStore.listen("message", userStore.parse);
 });
 onUnmounted(() => {
-  socketStore.listen("message", userStore.parse);
+  socketStore.unlisten("message", flashStore.parse);
+  socketStore.unlisten("message", userStore.parse);
 });
 </script>
 <template>
@@ -25,6 +29,15 @@ onUnmounted(() => {
         <Sidebar />
       </div>
       <div class="col-11">
+	<div class="row">
+          <div class="col-12">
+            <ul>
+              <li v-for="message in flashStore.buffer">
+                {{message}}
+              </li>
+            </ul>
+	  </div>
+	</div>
         <div v-if="!socketStore.connected" class="lds-dual-ring">
 	  Connecting...
         </div>

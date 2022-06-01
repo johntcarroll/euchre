@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import { useSocketStore } from "./socket.store";
 import { useUserStore } from "./user.store";
+import { useRouter } from 'vue-router';
 
 const useGameStore = defineStore("game", {
   state: () => ({
     uuid: null,
+    router: useRouter(),
     socketStore: useSocketStore(),
     userStore: useUserStore(),
     game: {
@@ -58,9 +60,6 @@ const useGameStore = defineStore("game", {
 	console.debug("Dropping call to", fn, params, "from game store")
       };
     },
-    attemptjoin() {
-      this.socket.send(`join ${this.uuid}`);
-    },
     attemptsit(seat) {
       this.socket.send(`sit ${seat}`);
     },
@@ -73,15 +72,14 @@ const useGameStore = defineStore("game", {
     attemptstand() {
       this.socket.send('stand');
     },
-    join(_id) {
-      //join successful
-      //this.router.push("game");
+    attemptjoin() {
+      this.socket.send(`join ${this.uuid}`);
     },
     attemptleave() {
       this.socket.send('leave');
     },
     leave() {
-      this.$reset();
+      this.router.push('/lobby');
     },
     error(...msg) {
       console.error(msg.join(' '));
