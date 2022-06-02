@@ -107,19 +107,9 @@ const useGameStore = defineStore("game", {
     kitty(rank=null, suit=null) {
       this.game.kitty.push({ rank, suit });
     },
-    act(type, option) {
-      try {
-        let validAction = state.game.actions.find(
-          (action) => action.type == type
-        );
-        if (!validAction || !validAction.options.includes(option))
-          throw "Invalid Action!";
-
-        state.socket.send(`${type} ${option}`);
-      } catch (e) {
-        throw e;
-      }
-    },
+    trump(suit) {
+      this.game.trumpSuit = suit;
+    }
   },
 });
 export { useGameStore };

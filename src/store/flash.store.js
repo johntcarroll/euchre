@@ -13,7 +13,7 @@ const useFlashStore = defineStore("flash", {
     },
     debug(fn) {
       return function(...params) {
-	console.debug("Dropping call to", fn, params, "from chat store")
+	console.debug("Dropping call to", fn, params, "from flash store")
       };
     },
     flushBuffer() {
