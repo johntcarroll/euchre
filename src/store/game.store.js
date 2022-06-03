@@ -36,7 +36,6 @@ const useGameStore = defineStore("game", {
       kitty: [],
       dealer: null,
       bidder: null,
-      iAmBidder: null,
       seats: {
         p1: null,
         p2: null,
@@ -47,6 +46,9 @@ const useGameStore = defineStore("game", {
   }),
   getters: {
     socket: (store) => store.socketStore.socket,
+    iAmBidder: (store) => {
+      return store.game.seats[`p${store.game.bidder}`] == store.userStore.sessionId;
+    },
   },
   actions: {
     parse(e) {
@@ -90,13 +92,8 @@ const useGameStore = defineStore("game", {
     attemptbid(yorn) {
       this.socket.send(`bid ${yorn}`);
     },
-    bidder(seat) {
+    bidder(seat=null) {
       this.game.bidder = seat;
-      this.game.iAmBidder =
-        this.game.seats[`p${seat}`] == this.userStore.sessionId;
-    },
-    bid() {
-      this.game.iAmBidder = true;
     },
     play(player, rank, suit) {
       this.game.activeCards[player] = { rank, suit };
