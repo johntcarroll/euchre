@@ -53,7 +53,7 @@ const useGameStore = defineStore("game", {
     iAmTrumpSelector: (store) => {
       return store.game.seats[`p${store.game.trumpSelector}`] == store.userStore.sessionId;
     },
-    availableTrumpSuits: (store) => ['hearts', 'diamonds', 'clubs', 'spades'].filter(suit => suit != store.game.deniedTrumpSuit)
+    availableTrumpSuits: (store) => ['hearts', 'diamonds', 'clubs', 'spades', 'no'].filter(suit => suit != store.game.deniedTrumpSuit)
   },
   actions: {
     parse(e) {
@@ -111,6 +111,9 @@ const useGameStore = defineStore("game", {
     },
     kitty(rank=null, suit=null) {
       this.game.kitty.push({ rank, suit });
+    },
+    attempttrumpselection(suit) {
+      this.socket.send(`trump ${suit}`);
     },
     trump(suit) {
       this.game.trumpSuit = suit;

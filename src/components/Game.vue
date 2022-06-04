@@ -29,7 +29,8 @@ onUnmounted(() => {
   <button @click="gameStore.attemptsit(4)">Sit at seat 4</button>
   <button @click="gameStore.attemptstand()">Stand up</button>
   <button v-if="gameStore.iAmTrumpSelector"
-          v-for="suit in gameStore.availableTrumpSuits">{{suit}}</button>
+          v-for="suit in gameStore.availableTrumpSuits"
+          @click="gameStore.attempttrumpselection(suit)">{{suit}}</button>
 
   <button v-if="gameStore.iAmBidder"
 	  @click="gameStore.attemptbid('yes')">Pick-it-up</button>
