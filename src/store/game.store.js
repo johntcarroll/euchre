@@ -36,6 +36,7 @@ const useGameStore = defineStore("game", {
       kitty: [],
       dealer: null,
       bidder: null,
+      trumpSelector: null,
       seats: {
         p1: null,
         p2: null,
@@ -49,6 +50,10 @@ const useGameStore = defineStore("game", {
     iAmBidder: (store) => {
       return store.game.seats[`p${store.game.bidder}`] == store.userStore.sessionId;
     },
+    iAmTrumpSelector: (store) => {
+      return store.game.seats[`p${store.game.trumpSelector}`] == store.userStore.sessionId;
+    },
+    availableTrumpSuits: (store) => ['hearts', 'diamonds', 'clubs', 'spades'].filter(suit => suit != store.game.deniedTrumpSuit)
   },
   actions: {
     parse(e) {
@@ -61,6 +66,9 @@ const useGameStore = defineStore("game", {
       return function(...params) {
 	console.debug("Dropping call to", fn, params, "from game store")
       };
+    },
+    allpass(suit) {
+      this.game.deniedTrumpSuit = suit;
     },
     attemptsit(seat) {
       this.socket.send(`sit ${seat}`);
@@ -106,6 +114,9 @@ const useGameStore = defineStore("game", {
     },
     trump(suit) {
       this.game.trumpSuit = suit;
+    },
+    trumpselector(seat=null) {
+      this.game.trumpSelector = seat;
     }
   },
 });
