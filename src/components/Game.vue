@@ -91,7 +91,7 @@ onUnmounted(() => {
         </Hand>
       </div>
       <div class="kitty">
-        <Hand handType="deck">
+        <Hand v-if="!gameStore.game.deniedTrumpSuit" handType="deck">
           <Card v-for="{rank, suit} in gameStore.game.kitty" :rank="rank" :suit="suit" />
         </Hand>
       </div>
