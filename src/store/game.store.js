@@ -117,9 +117,14 @@ const useGameStore = defineStore("game", {
     },
     trump(suit) {
       this.game.trumpSuit = suit;
+      this.game.bidder = null;
+      this.game.trumpSelector = null;
     },
     trumpselector(seat=null) {
       this.game.trumpSelector = seat;
+    },
+    screwthedealer(seat=null) {
+      this.game.screwTheDealer = true;
     }
   },
 });
