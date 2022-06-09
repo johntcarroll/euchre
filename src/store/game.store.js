@@ -103,11 +103,17 @@ const useGameStore = defineStore("game", {
     bidder(seat=null) {
       this.game.bidder = seat;
     },
-    play(player, rank, suit) {
-      this.game.activeCards[player] = { rank, suit };
-    },
     cardinhand(playernumber, rank=null, suit=null) {
       this.game.hands[`p${playernumber}`].push({ rank, suit });
+    },
+    play(playernumber, rank=null, suit=null) {
+      const index = this.game.hands[`p${playernumber}`].findIndex(function(e) {
+        return e.rank == rank && e.suit == suit;
+      });
+      this.game.hands[`p${playernumber}`].splice(index, 1);
+    },
+    cardinplay(playernumber, rank=null, suit=null) {
+      this.game.activeCards[`p${playernumber}`] = { rank, suit };
     },
     kitty(rank=null, suit=null) {
       this.game.kitty.push({ rank, suit });
