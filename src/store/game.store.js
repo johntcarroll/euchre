@@ -17,12 +17,12 @@ const useGameStore = defineStore("game", {
         p4: null,
       },
       trickCounts: {
-        us: 0,
-        them: 0,
+        t1: 0,
+        t2: 0,
       },
       gameScore: {
-        us: 0,
-        them: 0,
+        t1: 0,
+        t2: 0,
       },
       actionOn: null,
       trumpSuit: null,
@@ -115,6 +115,9 @@ const useGameStore = defineStore("game", {
     cardinplay(playernumber, rank=null, suit=null) {
       this.game.activeCards[`p${playernumber}`] = { rank, suit };
     },
+    cardleavesplay(playernumber) {
+      this.game.activeCards[`p${playernumber}`] = null;
+    },
     kitty(rank=null, suit=null) {
       this.game.kitty.push({ rank, suit });
     },
@@ -131,7 +134,10 @@ const useGameStore = defineStore("game", {
     },
     screwthedealer(seat=null) {
       this.game.screwTheDealer = true;
-    }
+    },
+    teamtrickstaken(team=null, tricks=0) {
+      this.game.trickCounts[`t${team}`] = tricks;
+    },
   },
 });
 export { useGameStore };
