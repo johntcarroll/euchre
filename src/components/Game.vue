@@ -100,7 +100,7 @@ onUnmounted(() => {
         <div>Trump: {{gameStore.game.trumpSuit}}</div>
         <div>Team 1 Tricks: {{gameStore.game.trickCounts.t1}}</div>
         <div>Team 2 Tricks: {{gameStore.game.trickCounts.t2}}</div>
-        <div>Role: Maker</div>
+        <div>Role: {{gameStore.game.role}}</div>
       </div>
       <div class="game-stats">
         <div>Game Stats</div>

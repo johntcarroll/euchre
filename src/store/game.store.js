@@ -124,6 +124,12 @@ const useGameStore = defineStore("game", {
     attempttrumpselection(suit) {
       this.socket.send(`trump ${suit}`);
     },
+    role(r) {
+      this.game.role = r;
+    },
+    screwthedealer(seat=null) {
+      this.game.screwTheDealer = true;
+    },
     trump(suit) {
       this.game.trumpSuit = suit;
       this.game.bidder = null;
@@ -131,9 +137,6 @@ const useGameStore = defineStore("game", {
     },
     trumpselector(seat=null) {
       this.game.trumpSelector = seat;
-    },
-    screwthedealer(seat=null) {
-      this.game.screwTheDealer = true;
     },
     teamtrickstaken(team=null, tricks=0) {
       this.game.trickCounts[`t${team}`] = tricks;
