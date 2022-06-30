@@ -20,7 +20,7 @@ const useGameStore = defineStore("game", {
         t1: 0,
         t2: 0,
       },
-      gameScore: {
+      scores: {
         t1: 0,
         t2: 0,
       },
@@ -140,6 +140,9 @@ const useGameStore = defineStore("game", {
     },
     teamtrickstaken(team=null, tricks=0) {
       this.game.trickCounts[`t${team}`] = tricks;
+    },
+    teamscore(team=null, score=0) {
+      this.game.scores[`t${team}`] = score;
     },
   },
 });
